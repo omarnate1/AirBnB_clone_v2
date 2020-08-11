@@ -45,18 +45,6 @@ class TestAmenity(unittest.TestCase):
         self.assertEqual(result.total_errors, 1,
                          "Found code style errors (and warnings).")
 
-    def test_module_docstring(self):
-        """
-        Tests if module docstring documentation exist
-        """
-        self.assertTrue(len(Amenity.__doc__) >= 1)
-
-    def test_class_docstring(self):
-        """
-        Tests if class docstring documentation exist
-        """
-        self.assertTrue(len(Amenity.__doc__) >= 1)
-
     def test_func_docstrings(self):
         """
         Tests if methods docstring documntation exist

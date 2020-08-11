@@ -159,12 +159,3 @@ class TestReview(unittest.TestCase):
         """test id of the class is a string
         """
         self.assertEqual(type(self.R.id), str)
-
-    def test_updated_time(self):
-        """test that updated time gets updated
-        """
-        time1 = self.R.updated_at
-        self.R.save()
-        time2 = self.R.updated_at
-        self.assertNotEqual(time1, time2)
-        self.assertEqual(type(time1), datetime)
