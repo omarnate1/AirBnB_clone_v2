@@ -23,7 +23,6 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
         else:
-            if len(kwargs) > 0:
             for k, v in kwargs.items():
                 if k in ['created_at', 'updated_at']:
                     self.__dict__[k] = datetime\
