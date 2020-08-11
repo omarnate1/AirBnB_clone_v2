@@ -8,17 +8,15 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
-    @classmethod
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
         if cls is None:
             return FileStorage.__objects
-        else:
-            my_dict = {}
-            for key, val in FileStorage.__objects.items():
-                if isinstance(val, cls):
-                    my_dict[key] = val
-            return my_dict
+        my_dict = {}
+        for key, val in self.__objects.items():
+            if isinstance(val, cls):
+                my_dict[key] = val
+        return my_dict
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -61,7 +59,9 @@ class FileStorage:
         """public instance method to delete obj from __objects
         if it’s inside
         """
-        if obj in self.__objects.values():
-            key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        if obj is None:
+            return
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        if key in self.__objects:
             del self.__objects[key]
             self.save()
