@@ -130,11 +130,11 @@ class HBNBCommand(cmd.Cmd):
                 attribute = HBNBCommand.verify_attribute(v)
             except:
                 continue
-            if attribute is None:
+            if not attribute:
                 continue
             setattr(new_instance, k, attribute)
-            new_instance.save()
-            print(new_instance.id)
+        new_instance.save()
+        print(new_instance.id)
 
     def help_create(self):
         """ Help information for the create method """
