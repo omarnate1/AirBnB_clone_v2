@@ -65,12 +65,6 @@ class TestConsole(unittest.TestCase):
             self.consol.onecmd("\n")
             self.assertEqual('', f.getvalue())
 
-    def test_quit(self):
-        """Test quit command"""
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("quit")
-            self.assertEqual('', f.getvalue())
-
     def test_create(self):
         """Test create command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
