@@ -9,6 +9,7 @@ from models.place import Place
 from models.review import Review
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker, scoped_session
+import sqlalchemy
 import os
 
 
@@ -28,9 +29,8 @@ class DBStorage:
 
     def __init__(self):
         """Contructor for the class DBStorage"""
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(user, pwd, host, db),
-                                      pool_pre_ping=True)
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
+            user, pwd, host, db), pool_pre_ping=True)
     if env == "test":
         Base.MetaData.drop_all(self.__engine)
 
@@ -52,7 +52,7 @@ class DBStorage:
 
     def new(self, obj):
         """Method to add a new object to the current database"""
-        DBStorage.__session.add(obj)
+        self.__session.add(obj)
 
     def save(self):
         """Method to commit all changes to the current database"""
