@@ -336,7 +336,7 @@ class HBNBCommand(cmd.Cmd):
         Verify if the attribute is correctly formatted
         """
         if attribute[0] is attribute[-1] in ['"', "'"]:
-            return attribute.strip('"\'').replace('_', ' ')
+            return attribute.strip('"\'').replace('_', ' ').replace('\\', '"')
         else:
             try:
                 try:
