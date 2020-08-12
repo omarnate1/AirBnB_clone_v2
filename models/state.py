@@ -17,11 +17,9 @@ class State(BaseModel, Base):
     def cities(self):
         """getter attribute cities that returns the list of City"""
         from models import storage
-        if os.getenv('HBNB_TYPE_STORAGE') != 'db':
-            my_list = []
-            extracted_cities = models.storage.all(City).values()
-            for city in extracted_cities:
-                if self.id == city.state_id:
-                    my_list.append(city)
-            return my_list
-        return
+        my_list = []
+        extracted_cities = models.storage.all(City).values()
+        for city in extracted_cities:
+            if self.id == city.state_id:
+                my_list.append(city)
+        return my_list
