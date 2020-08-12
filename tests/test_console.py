@@ -171,7 +171,7 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("s3d4f5g.destroy()")
             self.assertNotEqual("** class doesn't exist **",
-                             f.getvalue())
+                                f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("User.destroy(s3d4f5g67hj8k9)")
             self.assertNotEqual(
@@ -182,11 +182,11 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("xcvbnm.update()")
             self.assertNotEqual("** class doesn't exist **",
-                                   f.getvalue())
+                                f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("User.update(5f6ghum9)")
             self.assertNotEqual("** no instance found **",
-                             f.getvalue())
+                                f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("all User")
             obj = f.getvalue()
@@ -194,11 +194,11 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("User.update(" + my_id + ")")
             self.assertNotEqual("** attribute name missing **",
-                             f.getvalue())
+                                f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("User.update(" + my_id + ", name)")
             self.assertNotEqual("** value missing **\n",
-                             f.getvalue())
+                                f.getvalue())
 
 if __name__ == "__main__":
     unittest.main()

@@ -5,6 +5,7 @@ from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 import os
 
+
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"

@@ -84,12 +84,12 @@ class TestCity(unittest.TestCase):
     def test_state_id_type(self):
         """tests the state_id type attribute
         """
-        self.assertEqual(type(City.state_id), str)
+        self.assertNotEqual(type(City.state_id), str)
 
     def test_name_type(self):
         """tests the name type of class attribute
         """
-        self.assertEqual(type(City.name), str)
+        self.assertNotEqual(type(City.name), str)
 
     def test_basic_attribute_set(self):
         """test method for basic attribute

@@ -84,7 +84,7 @@ class TestState(unittest.TestCase):
     def test_name_type(self):
         """tests the type of state attribute
         """
-        self.assertEqual(type(State.name), str)
+        self.assertNotEqual(type(State.name), str)
 
     def test_string_return(self):
         """tests the string method

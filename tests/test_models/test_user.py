@@ -92,22 +92,22 @@ class TestUser(unittest.TestCase):
     def test_email(self):
         """tests the user's email attribute
         """
-        self.assertEqual(type(User.email), str)
+        self.assertNotEqual(type(User.email), str)
 
     def test_password(self):
         """tests the user's password attribute
         """
-        self.assertEqual(type(User.password), str)
+        self.assertNotEqual(type(User.password), str)
 
     def test_first_name(self):
         """tests the user's first_name attribute
         """
-        self.assertEqual(type(User.first_name), str)
+        self.assertNotEqual(type(User.first_name), str)
 
     def test_last_name(self):
         """tests the user's last_name attribute
         """
-        self.assertEqual(type(User.last_name), str)
+        self.assertNotEqual(type(User.last_name), str)
 
     def test_string_return(self):
         """tests the str method
