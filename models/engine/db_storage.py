@@ -9,7 +9,6 @@ from models.place import Place
 from models.review import Review
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker, scoped_session
-import sqlalchemy
 import os
 
 
@@ -23,7 +22,7 @@ env = os.getenv('HBNB_ENV')
 class DBStorage:
     """Defining the class DBStorage"""
 
-    __classes = [State, City, User, Place, Review, Amenity]
+    __classes = [State, City]
     __engine = None
     __session = None
 
@@ -38,13 +37,13 @@ class DBStorage:
         """Method to return a dictionary of objects"""
         my_dict = {}
         if cls in self.__classes:
-            result = DBStorage.__session.query(cls.__class__.__name__)
+            result = self.__session.query(cls.__class__.__name__)
             for row in result:
                 key = "{}.{}".format(row.__class__.__name__, row.id)
                 my_dict[key] = row
         elif cls is None:
             for cl in self.__classes:
-                result = DBStorage.__session.query(cl)
+                result = self.__session.query(cl)
                 for row in result:
                     key = "{}.{}".format(row.__class__.__name__, row.id)
                     my_dict[key] = row
@@ -52,20 +51,29 @@ class DBStorage:
 
     def new(self, obj):
         """Method to add a new object to the current database"""
-        self.__session.add(obj)
+        try:
+            self.__session.add(obj)
+        except:
+            pass
 
     def save(self):
         """Method to commit all changes to the current database"""
-        self.__session.commit()
+        if self.__session:
+            self.__session.commit()
 
     def delete(self, obj=None):
         """Method to delete a new object to the current database"""
-        self.__session.delete(obj)
+        try:
+            self.__session.delete(obj)
+        except:
+            pass
 
     def reload(self):
         """Method to create the current database session"""
-        Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine,
-                                       expire_on_commit=False)
-        Session = scoped_session(session_factory)
-        DBStorage.__session = Session()
+        try:
+            Base.metadata.create_all(self.__engine)
+            session_factory = sessionmaker(bind=self.__engine,
+                                           expire_on_commit=False)
+            self.__session = scoped_session(session_factory)
+        except Exception as e:
+            print(e)
