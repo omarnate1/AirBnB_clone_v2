@@ -22,7 +22,7 @@ env = os.getenv('HBNB_ENV')
 class DBStorage:
     """Defining the class DBStorage"""
 
-    __classes = [State, City]
+    __classes = [State, City, User, Place, Review]
     __engine = None
     __session = None
 
@@ -37,13 +37,13 @@ class DBStorage:
         """Method to return a dictionary of objects"""
         my_dict = {}
         if cls in self.__classes:
-            result = self.__session.query(cls.__class__.__name__)
+            result = DBStorage.__session.query(cls.__class__.__name__)
             for row in result:
                 key = "{}.{}".format(row.__class__.__name__, row.id)
                 my_dict[key] = row
         elif cls is None:
             for cl in self.__classes:
-                result = self.__session.query(cl)
+                result = DBStorage.__session.query(cl)
                 for row in result:
                     key = "{}.{}".format(row.__class__.__name__, row.id)
                     my_dict[key] = row
@@ -52,21 +52,21 @@ class DBStorage:
     def new(self, obj):
         """Method to add a new object to the current database"""
         try:
-            self.__session.add(obj)
+            DBStorage.__session.add(obj)
         except:
             pass
 
     def save(self):
         """Method to commit all changes to the current database"""
         try:
-            self.__session.commit()
+            DBStorage.__session.commit()
         except Exception as e:
             print(e)
 
     def delete(self, obj=None):
         """Method to delete a new object to the current database"""
         try:
-            self.__session.delete(obj)
+            DBStorage.__session.delete(obj)
         except:
             pass
 
@@ -76,6 +76,7 @@ class DBStorage:
             Base.metadata.create_all(self.__engine)
             session_factory = sessionmaker(bind=self.__engine,
                                            expire_on_commit=False)
-            self.__session = scoped_session(session_factory)
+            Session = scoped_session(session_factory)
+            DBStorage.__session = Session()
         except Exception as e:
             print(e)
