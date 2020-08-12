@@ -58,8 +58,10 @@ class DBStorage:
 
     def save(self):
         """Method to commit all changes to the current database"""
-        if self.__session:
+        try:
             self.__session.commit()
+        except Exception as e:
+            print(e)
 
     def delete(self, obj=None):
         """Method to delete a new object to the current database"""
