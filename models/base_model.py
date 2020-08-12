@@ -16,7 +16,7 @@ class BaseModel:
     updated_at = Column(DateTime, default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
-        """Instatntiates a new model"""
+        """Instantiates a new model"""
         if not kwargs:
             from models import storage
             self.id = str(uuid.uuid4())
@@ -30,7 +30,7 @@ class BaseModel:
                 elif k == 'id':
                     self.id = v
                 else:
-                    setaattr(self, k, v)
+                    setattr(self, k, v)
 
     def __str__(self):
         """Returns a string representation of the instance"""
@@ -45,7 +45,7 @@ class BaseModel:
         storage.save()
 
     def to_dict(self):
-        """Convert instance into dict format"""
+        """Convert instance into dict format"""       
         dictionary = {}
         dictionary.update(self.__dict__)
         dictionary.update({'__class__':
