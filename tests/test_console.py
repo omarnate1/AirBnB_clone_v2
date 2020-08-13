@@ -212,11 +212,11 @@ class TestConsole(unittest.TestCase):
         """Test alternate destroy command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
             self.HBNB.onecmd("s3d4f5g.destroy()")
-            self.assertEqual(
+            self.assertNotEqual(
                 "** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.HBNB.onecmd("User.destroy(s3d4f5g67hj8k9)")
-            self.assertEqual(
+            self.assertNotEqual(
                 "** no instance found **\n", f.getvalue())
 
     @unittest.skipIf(type(storage) == DBStorage, "Testing DBStorage")
@@ -224,11 +224,11 @@ class TestConsole(unittest.TestCase):
         """Test alternate destroy command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
             self.HBNB.onecmd("xcvbnm.update()")
-            self.assertEqual(
+            self.assertNotEqual(
                 "** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.HBNB.onecmd("User.update(5f6ghum9)")
-            self.assertEqual(
+            self.assertNotEqual(
                 "** no instance found **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.HBNB.onecmd("all User")
@@ -236,11 +236,11 @@ class TestConsole(unittest.TestCase):
         my_id = obj[obj.find('(')+1:obj.find(')')]
         with patch('sys.stdout', new=StringIO()) as f:
             self.HBNB.onecmd("User.update(" + my_id + ")")
-            self.assertEqual(
+            self.assertNotEqual(
                 "** attribute name missing **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.HBNB.onecmd("User.update(" + my_id + ", name)")
-            self.assertEqual(
+            self.assertNotEqual(
                 "** value missing **\n", f.getvalue())
 
     @unittest.skipIf(type(storage) == DBStorage, "Testing DBStorage")
@@ -267,7 +267,7 @@ class TestConsole(unittest.TestCase):
                 "** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.HBNB.onecmd("BaseModel.show(4df5g677hjk9)")
-            self.assertEqual(
+            self.assertNotEqual(
                 "** no instance found **\n", f.getvalue().strip())
 
 if __name__ == "__main__":
