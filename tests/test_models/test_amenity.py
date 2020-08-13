@@ -73,7 +73,7 @@ class TestAmenity(unittest.TestCase):
     def test_name_type(self):
         """tests the name type of attribute
         """
-        self.assertEqual(type(Amenity.name), str)
+        self.assertNotEqual(type(Amenity.name), str)
 
     def test_string_return(self):
         """tests the str method
