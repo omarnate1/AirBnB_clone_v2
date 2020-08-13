@@ -267,7 +267,8 @@ class TestConsole(unittest.TestCase):
                 "** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.HBNB.onecmd("BaseModel.show(4df5g677hjk9)")
-            self.assertEqual("** no instance found **", f.getvalue().strip())
+            self.assertEqual(
+                "** no instance found **", f.getvalue().strip())
 
 if __name__ == "__main__":
     unittest.main()
