@@ -248,10 +248,12 @@ class TestConsole(unittest.TestCase):
         """Test alternative commands into the class default"""
         with patch('sys.stdout', new=StringIO()) as f:
             self.HBNB.onecmd("vbunimop.all()")
-            self.assertNotEqual("** class doesn't exist **", f.getvalue())
+            self.assertNotEqual(
+                "** class doesn't exist **", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.HBNB.onecmd("State.all()")
-            self.assertNotEqual("[]", f.getvalue())
+            self.assertNotEqual(
+                "[]", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.HBNB.onecmd("xcrtvbyun.count()")
             self.assertNotEqual(
@@ -265,8 +267,7 @@ class TestConsole(unittest.TestCase):
                 "** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.HBNB.onecmd("BaseModel.show(4df5g677hjk9)")
-            self.assertNotEqual(
-                "** no instance found **\n", f.getvalue())
+            self.assertEqual("** no instance found **", f.getvalue().strip())
 
 if __name__ == "__main__":
     unittest.main()
