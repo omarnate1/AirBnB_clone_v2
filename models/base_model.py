@@ -23,14 +23,21 @@ class BaseModel():
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
         else:
+            if 'updated_at' in kwargs:
+                kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
+                                                         '%Y-%m-%dT%H:%M:%S.%f'
+                                                         )
+            else:
+                self.updated_at = datetime.now()
+            if 'created_at' in kwargs:
+                kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
+                                                         '%Y-%m-%dT%H:%M:%S.%f'
+                                                         )
+            else:
+                self.created_at = datetime.now()
             if 'id' not in kwargs:
                 self.id = str(uuid.uuid4())
-            for k, v in kwargs.items():
-                if k in ['created_at', 'updated_at']:
-                    self.__dict__[v] = datetime\
-                                       .strptime(v, '%Y-%m-%dT%H:%M:%S.%f')
-                elif "__class__" not in k:
-                    setattr(self, k, v)
+            self.__dict__.update(kwargs)
 
     def __str__(self):
         """Returns a string representation of the instance"""
@@ -50,9 +57,7 @@ class BaseModel():
         dictionary.update(self.__dict__)
         dictionary.update({'__class__':
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
-        key = "_sa_instance_state"
-        if dictionary.get(key):
-            del dictionary[key]
+        dictionary.pop("_sa_instance_state", None)
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
         return dictionary
