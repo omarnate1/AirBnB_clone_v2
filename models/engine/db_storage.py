@@ -56,11 +56,11 @@ class DBStorage:
     def save(self):
         """Method to commit all changes to the current database"""
         DBStorage.__session.commit()
-        
+
     def delete(self, obj=None):
         """Method to delete a new object to the current database"""
         DBStorage.__session.delete(obj)
-        
+
     def reload(self):
         """Method to create the current database session"""
         Base.metadata.create_all(self.__engine)
