@@ -22,7 +22,7 @@ env = os.getenv('HBNB_ENV')
 class DBStorage:
     """Defining the class DBStorage"""
 
-    __classes = [State, City, User, Place, Review]
+    __classes = [State, City, User, Place, Review, Amenity]
     __engine = None
     __session = None
 
@@ -51,32 +51,20 @@ class DBStorage:
 
     def new(self, obj):
         """Method to add a new object to the current database"""
-        try:
-            DBStorage.__session.add(obj)
-        except:
-            pass
+        DBStorage.__session.add(obj)
 
     def save(self):
         """Method to commit all changes to the current database"""
-        try:
-            DBStorage.__session.commit()
-        except Exception as e:
-            print(e)
-
+        DBStorage.__session.commit()
+        
     def delete(self, obj=None):
         """Method to delete a new object to the current database"""
-        try:
-            DBStorage.__session.delete(obj)
-        except:
-            pass
-
+        DBStorage.__session.delete(obj)
+        
     def reload(self):
         """Method to create the current database session"""
-        try:
-            Base.metadata.create_all(self.__engine)
-            session_factory = sessionmaker(bind=self.__engine,
-                                           expire_on_commit=False)
-            Session = scoped_session(session_factory)
-            DBStorage.__session = Session()
-        except Exception as e:
-            print(e)
+        Base.metadata.create_all(self.__engine)
+        session_factory = sessionmaker(bind=self.__engine,
+                                       expire_on_commit=False)
+        Session = scoped_session(session_factory)
+        DBStorage.__session = Session()

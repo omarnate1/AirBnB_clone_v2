@@ -13,8 +13,8 @@ class BaseModel():
     """A base class for all hbnb models"""
 
     id = Column(String(60), primary_key=True)
-    created_at = Column(DateTime, default=datetime.utcnow())
-    updated_at = Column(DateTime, default=datetime.utcnow())
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
         """Instantiates a new model"""
@@ -23,9 +23,11 @@ class BaseModel():
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
         else:
+            if 'id' not in kwargs:
+                self.id = str(uuid.uuid4())
             for k, v in kwargs.items():
                 if k in ['created_at', 'updated_at']:
-                    self.__dict__[k] = datetime\
+                    self.__dict__[v] = datetime\
                                        .strptime(v, '%Y-%m-%dT%H:%M:%S.%f')
                 elif "__class__" not in k:
                     setattr(self, k, v)
