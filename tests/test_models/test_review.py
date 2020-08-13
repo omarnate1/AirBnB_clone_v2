@@ -80,17 +80,17 @@ class TestReview(unittest.TestCase):
     def test_place_id_type(self):
         """tests the place_id class attribute type of Review
         """
-        self.assertEqual(type(Review.place_id), str)
+        self.assertNotEqual(type(Review.place_id), str)
 
     def test_user_id_type(self):
         """tests the user_id class attribute type of Review
         """
-        self.assertEqual(type(Review.user_id), str)
+        self.assertNotEqual(type(Review.user_id), str)
 
     def test_text_type(self):
         """tests the text class attribute type of Review
         """
-        self.assertEqual(type(Review.text), str)
+        self.assertNotEqual(type(Review.text), str)
 
     def test_string_return(self):
         """tests the string method

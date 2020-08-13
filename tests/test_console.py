@@ -77,6 +77,18 @@ class TestConsole(unittest.TestCase):
                 "** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd('create User email="user" password="passwd"')
+        if os.getenv('HBNB_TYPE_STORAGE') != 'db':
+            with patch('sys.stdout', new=StringIO()) as f:
+                self.consol.onecmd("create User")
+        if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+            with patch('sys.stdout', new=StringIO()) as f:
+                self.consol.onecmd(
+                    'create User \
+                     email="meco@montes.com" \
+                     password="00000" \
+                     first_name="Robinson" \
+                     last_name="Montes" \
+                     ')
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("all User")
             self.assertEqual(
@@ -193,6 +205,31 @@ class TestConsole(unittest.TestCase):
             self.consol.onecmd("User.update(" + my_id + ", name)")
             self.assertNotEqual("** value missing **\n",
                                 f.getvalue())
+
+def test_default(self):
+        """Test alternative commands into the class default"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("vbunimop.all()")
+            self.assertEqual(
+                "** class doesn't exist **\n", f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("State.all()")
+            self.assertEqual("[]\n", f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("xcrtvbyun.count()")
+            self.assertEqual(
+                "** class doesn't exist **\n", f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("State.count()")
+            self.assertEqual("0\n", f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("qwerty.show()")
+            self.assertEqual(
+                "** class doesn't exist **\n", f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("BaseModel.show(4df5g677hjk9)")
+            self.assertEqual(
+                "** no instance found **\n", f.getvalue())
 
 if __name__ == "__main__":
     unittest.main()
