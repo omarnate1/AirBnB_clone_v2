@@ -57,7 +57,7 @@ class BaseModel():
         dictionary.update(self.__dict__)
         dictionary.update({'__class__':
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
-        dictionary.pop("_sa_instance_state", None)
+        dictionary.pop("_sa_instance_state")
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
         return dictionary
@@ -66,4 +66,5 @@ class BaseModel():
         """public instance method to delete the current instance from
         the storage (models.storage)
         """
+        from models import storage
         storage.delete(self)
