@@ -31,7 +31,7 @@ class DBStorage:
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
             user, pwd, host, db), pool_pre_ping=True)
     if env == "test":
-        Base.MetaData.drop_all(self.__engine)
+        Base.MetaData.drop_all()
 
     def all(self, cls=None):
         """Method to return a dictionary of objects"""
