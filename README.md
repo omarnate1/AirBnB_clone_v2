@@ -42,6 +42,10 @@ This storage engine will give us an abstraction between “My object” and “H
 
 You can find this in: [AirBnB clone - The console](https://github.com/luismvargasg/AirBnB_clone)
 
+For the second part of the project we should build the database connection through SQLAlchemy, the ORM of Python.
+
+Using a MySQL storage we replace the file storage (JSON file) by a Database storage and we map your models to a table in database by using an O.R.M.
+
 ## Directory Files Description
 
 | **File** | **Description** |
