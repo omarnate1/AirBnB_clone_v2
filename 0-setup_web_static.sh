@@ -1,44 +1,18 @@
 #!/usr/bin/env bash
-# Create directories for the project and setup nginx
+# Script that sets up your web servers for the deployment of web_static.
 
-sudo mkdir -p /data/web_static/releases/test
-sudo mkdir -p /data/web_static/shared
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo mkdir -p /data/web_static/shared/
+sudo mkdir -p /data/web_static/releases/test/
 echo "<html>
   <head>
   </head>
   <body>
     Holberton School
   </body>
-</html>" | tee /data/web_static/releases/test/index.html
-sudo ln -sfn /data/web_static/releases/test /data/web_static/current
-sudo chown -R ubuntu:ubuntu /data/
-
-# update config file to redirect
-printf %s "server {
-    listen 80;
-    listen [::]:80 default_server;
-    root   /data/web_static/current;
-    index  index.html index.htm 8-index.html;
-
-    add_header X-Served-By 1574-web-01;
-
-    location / {
-        alias /data/web_static/current/;
-    }
-
-    location /redirect_me {
-        return 301 http://google.com/;
-    }
-
-    location /hbnb_static {
-        alias /data/web_static/current/;
-    }
-
-    error_page 404 /404.html;
-    location /404 {
-      root /usr/share/nginx/html;
-      internal;
-    }
-}" > /etc/nginx/sites-available/default
-
+</html>" >> /data/web_static/releases/test/index.html
+sudo ln -sfn /data/web_static/releases/test/ /data/web_static/current
+sudo chown -f -R ubuntu:ubuntu /data/
+sudo sed -i "26i \\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n" /etc/nginx/sites-available/default
 sudo service nginx restart
