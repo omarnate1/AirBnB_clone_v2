@@ -15,7 +15,7 @@ def do_pack():
     now = datetime.now().strftime("%Y%m%d%H%M%S")
     local('sudo mkdir -p ./versions')
     file = local('sudo tar -czvf ./versions/web_static_{}.tgz web_static'
-                   .format(now))
+                 .format(now))
     if file.succeeded:
         return file
     else:
