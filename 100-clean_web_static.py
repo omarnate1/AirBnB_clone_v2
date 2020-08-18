@@ -57,6 +57,9 @@ def deploy():
 
 
 def do_clean(number=0):
+    """
+    Keep it cleanning the repositories
+    """
     if number == 0 or number == 1:
         with lcd('./versions/'):
             local("ls -lv | rev | cut -f 1 | rev | \
