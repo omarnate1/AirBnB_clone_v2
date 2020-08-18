@@ -17,6 +17,7 @@ def do_pack():
     file = local('sudo tar -czvf ./versions/web_static_{}.tgz web_static'
                  .format(now))
     if file.succeeded:
-        return file
+        path = './versions/web_static_{}.tgz'.format(now))
+        return path
     else:
         return None
