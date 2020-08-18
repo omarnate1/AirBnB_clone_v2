@@ -48,5 +48,5 @@ def do_deploy(archive_path):
 
 def deploy():
     archive_path = do_pack()
-    answer = do_depoy(archive_path)
+    answer = do_deploy(archive_path)
     return answer
