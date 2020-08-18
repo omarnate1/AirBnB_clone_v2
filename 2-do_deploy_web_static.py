@@ -7,6 +7,8 @@ Created on Mon Aug 13 14:21:54 2020
 from fabric.api import local, put, run, env
 from datetime import datetime
 
+env.hosts = ['35.227.35.75', '100.24.37.33']
+
 
 def do_pack():
     """
@@ -26,7 +28,6 @@ def do_deploy(archive_path):
     """Deploy the boxing package tgz file
     """
     try:
-        env.hosts = ['35.227.35.75', '100.24.37.33']
         archive = archive_path.split('/')[-1]
         path = '/data/web_static/releases/' + archive.strip('.tgz')
         current = '/data/web_static/current'
