@@ -7,6 +7,9 @@ Created on Mon Aug 13 14:21:54 2020
 from fabric.api import local
 from datetime import datetime
 
+env.user = 'ubuntu'
+env.hosts = ['35.227.35.75', '100.24.37.33']
+
 
 def do_pack():
     """
@@ -14,10 +17,10 @@ def do_pack():
     """
     now = datetime.now().strftime("%Y%m%d%H%M%S")
     local('sudo mkdir -p ./versions')
-    file = local('sudo tar -czvf ./versions/web_static_{}.tgz web_static'
-                 .format(now))
-    if file.succeeded:
-        path = './versions/web_static_{}.tgz'.format(now))
-        return path
+    path = './versions/web_static_{}'.format(now)
+    local('sudo tar -czvf {}.tgz web_static'.format(path))
+    name = '{}.tgz'.format(path)
+    if name:
+        return name
     else:
         return None
