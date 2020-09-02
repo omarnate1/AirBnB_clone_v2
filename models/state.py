@@ -3,6 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
+from models.city import City
 import os
 
 
@@ -18,7 +19,7 @@ class State(BaseModel, Base):
         """getter attribute cities that returns the list of City"""
         from models import storage
         my_list = []
-        extracted_cities = models.storage.all(City).values()
+        extracted_cities = storage.all(City).values()
         for city in extracted_cities:
             if self.id == city.state_id:
                 my_list.append(city)
