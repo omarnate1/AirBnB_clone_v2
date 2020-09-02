@@ -6,13 +6,13 @@ Created on Tue Sep  1 14:42:23 2020
 @author: Robinson Montes
 """
 from models import storage
-from flask import Flask
-from flask import render_template
+from models.state import State
+from flask import Flask, render_template
 app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def appcontext_teardown(exc=None):
+def appcontext_teardown(self):
     """use storage for fetching data from the storage engine
     """
     storage.close()
@@ -22,7 +22,7 @@ def appcontext_teardown(exc=None):
 def state_info():
     """Display a HTML page inside the tag BODY"""
     return render_template('7-states_list.html',
-                           states=storage.all('State'))
+                           states=storage.all(State))
 
 
 if __name__ == '__main__':
