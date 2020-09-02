@@ -259,7 +259,7 @@ Update FileStorage: (models/engine/file_storage.py)
 * Add a public method def close(self):: call reload() method for deserializing the JSON file to objects
 
 Update DBStorage: (models/engine/db_storage.py)
-* Add a public method def close(self):: call remove() method on the private session attribute (self.__session) tips or close() on the class Session tips
+* Add a public method def close(self):: call remove() method on the private session attribute (self.__session) [tips](https://docs.sqlalchemy.org/en/13/orm/contextual.html) or close() on the class Session [tips](https://docs.sqlalchemy.org/en/13/orm/session_api.html)
 
 Update State: (models/state.py) - If it’s not already present
 * If your storage engine is not DBStorage, add a public getter method cities to return the list of City objects from storage linked to the current State
@@ -358,7 +358,7 @@ guillaume@ubuntu:~/AirBnB_v2$
         * H1 tag: “States”
         * UL tag: with the list of all State objects present in DBStorage sorted by name (A->Z) tip
         * LI tag: description of one State: <state.id>: <B><state.name></B>
-* Import this 7-dump to have some data
+* Import this [7-dump](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/290/7-states_list.sql) to have some data
 * You must use the option strict_slashes=False in your route definition
 
 IMPORTANT
@@ -429,7 +429,7 @@ guillaume@ubuntu:~$
 * Routes:
     * /cities_by_states: display a HTML page: (inside the tag BODY)
      * H1 tag: “States”
-     * UL tag: with the list of all State objects present in DBStorage sorted by name (A->Z) tip
+     * UL tag: with the list of all State objects present in DBStorage sorted by name (A->Z) [tip](https://jinja.palletsprojects.com/en/2.9.x/templates/)
      * LI tag: description of one State: <state.id>: <B><state.name></B> + UL tag: with the list of City objects linked to the State sorted by name (A->Z)
      * LI tag: description of one City: <city.id>: <B><city.name></B>
 * Import this 7-dump to have some data
@@ -619,7 +619,7 @@ guillaume@ubuntu:~$
 * Routes:
         /states: display a HTML page: (inside the tag BODY)
             H1 tag: “States”
-            UL tag: with the list of all State objects present in DBStorage sorted by name (A->Z) tip
+            UL tag: with the list of all State objects present in DBStorage sorted by name (A->Z) [tip](https://jinja.palletsprojects.com/en/2.9.x/templates/)
                 LI tag: description of one State: <state.id>: <B><state.name></B>
         /states/<id>: display a HTML page: (inside the tag BODY)
             If a State object is found with this id:
