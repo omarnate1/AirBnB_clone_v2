@@ -37,7 +37,7 @@ class DBStorage:
         """Method to return a dictionary of objects"""
         my_dict = {}
         if cls in self.__classes:
-            result = DBStorage.__session.query(cls.__class__.__name__)
+            result = DBStorage.__session.query(cls)
             for row in result:
                 key = "{}.{}".format(row.__class__.__name__, row.id)
                 my_dict[key] = row
@@ -68,3 +68,7 @@ class DBStorage:
                                        expire_on_commit=False)
         Session = scoped_session(session_factory)
         DBStorage.__session = Session()
+
+    def close(self):
+        """public methodto to call remove method"""
+        DBStorage.__session.close()
